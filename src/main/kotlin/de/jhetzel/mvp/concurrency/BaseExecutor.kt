@@ -1,15 +1,14 @@
-package de.jhetzel.mvp.operation
+package de.jhetzel.mvp.concurrency
 
 import java.util.concurrent.*
-import java.util.concurrent.Executor
 
 
-class ExecutorImpl : Executor {
+abstract class BaseExecutor : Executor {
 
     private val threadPoolExecutor: ThreadPoolExecutor = ThreadPoolExecutor(3, 10, 50L, TimeUnit.SECONDS,  LinkedBlockingDeque<Runnable>(), ThreadFactoryImpl())
 
-    override fun execute(command: Runnable?) {
-        threadPoolExecutor.execute(command)
+    override fun executeOnBackgroundThread(operation: () -> Unit) {
+        threadPoolExecutor.execute { operation.invoke() }
     }
 
     private class ThreadFactoryImpl : ThreadFactory {

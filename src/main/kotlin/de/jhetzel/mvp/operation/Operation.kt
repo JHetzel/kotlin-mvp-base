@@ -6,7 +6,7 @@ import javafx.application.Platform.runLater
 /**
  *
  */
-abstract class Operation<A : Action>(
+abstract class Operation<in A : Action>(
         protected val environment: Environment
 ) {
 
@@ -21,28 +21,23 @@ abstract class Operation<A : Action>(
                 .pushEvent(action)
 
         environment.getOperationExecutor()
-                .execute(RunnableImpl(this))
+                .executeOnBackgroundThread {
+                    onExecute(action)
+                }
     }
 
     protected abstract fun onExecute(action: A)
 
     protected fun postResult(result: Result) {
         resultCallback?.let { callback ->
-            runLater {
-                callback.invoke(result)
-            }
+            environment.getOperationExecutor()
+                    .executeOnMainThread {
+                        callback.invoke(result)
+                    }
         }
 
         environment.getEventBus()
                 .pushEvent(result)
-    }
-
-    private class RunnableImpl<T : Action>(
-            private val operation: Operation<T>
-    ) : Runnable {
-        override fun run() {
-            operation.onExecute(operation.action)
-        }
     }
 
 }

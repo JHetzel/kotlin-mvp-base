@@ -2,7 +2,7 @@ package de.jhetzel.mvp
 
 import de.jhetzel.eventbus.EventBus
 import de.jhetzel.mvp.data.Repository
-import java.util.concurrent.Executor
+import de.jhetzel.mvp.concurrency.Executor
 import kotlin.reflect.KClass
 
 
