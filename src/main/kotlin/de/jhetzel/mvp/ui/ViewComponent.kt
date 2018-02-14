@@ -1,5 +1,5 @@
 package de.jhetzel.mvp.ui
 
 
-interface View {
+interface ViewComponent {
 }
