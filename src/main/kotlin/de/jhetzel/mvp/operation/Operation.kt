@@ -6,7 +6,7 @@ import de.jhetzel.mvp.Environment
  *
  */
 abstract class Operation<in A : OperationAction>(
-        protected val environment: Environment
+        protected open val environment: Environment
 ) {
 
     private lateinit var action: A
