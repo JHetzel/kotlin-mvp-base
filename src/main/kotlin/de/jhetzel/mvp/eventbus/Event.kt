@@ -1,4 +1,4 @@
-package de.jhetzel.eventbus
+package de.jhetzel.mvp.eventbus
 
 
 interface Event

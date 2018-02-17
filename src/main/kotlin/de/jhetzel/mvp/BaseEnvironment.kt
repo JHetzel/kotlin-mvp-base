@@ -1,6 +1,6 @@
 package de.jhetzel.mvp
 
-import de.jhetzel.eventbus.EventBus
+import de.jhetzel.mvp.eventbus.EventBus
 import de.jhetzel.mvp.concurrency.BaseExecutor
 import de.jhetzel.mvp.concurrency.Executor
 
