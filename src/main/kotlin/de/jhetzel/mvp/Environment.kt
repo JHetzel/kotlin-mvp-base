@@ -11,7 +11,7 @@ interface Environment {
 
     fun getOperationExecutor(): Executor
 
-    fun <T : Any> getConfig(configClass: KClass<T>)
+    fun <T : Any> getService(configClass: KClass<T>): T
 }
 
-inline fun <reified T : Any> Environment.getConfig() =  getConfig(T::class)
+inline fun <reified T : Any> Environment.getService(): T =  getService(T::class)
